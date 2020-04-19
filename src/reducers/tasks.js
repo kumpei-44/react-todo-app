@@ -3,8 +3,9 @@ const intialState = {
   task: ''
 };
 
+// まずはReducerの生成
+// Reducerを通してStoreの値を変更する
 export default function tasksReducer(state = intialState, action) {
-  console.log('reducer通りました');
   switch (action.type) {
     case 'ADD_TASK':
       return {

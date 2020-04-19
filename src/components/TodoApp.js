@@ -2,6 +2,7 @@ import React from 'react';
 import {inputTask, addTask} from '../actions/tasks';
 
 export default function TodoApp({store}) {
+  // getState関数でStoreの中のStateを取得できる
   const {task, tasks} = store.getState();
   return (
     <div>
