@@ -1,13 +1,13 @@
 import React from 'react';
-import {inputTask, addTask} from '../actions/tasks';
 
-export default function TodoApp({store}) {
-  // getState関数でStoreの中のStateを取得できる
-  const {task, tasks} = store.getState();
+// reduxのみの場合、Store自体がPropsに渡りそこからStateを取得していた
+// react-reduxの場合、containersから整形されたオブジェクトがPropsに渡っている
+// コンポーネントのRedux依存が消えて、再利用率が高まった
+export default function TodoApp({task, tasks, addTask, inputTask}) {
   return (
     <div>
-      <input type="text" onChange={(e) => store.dispatch(inputTask(e.target.value))} />
-      <input type="button" value="add" onClick={() => store.dispatch(addTask(task))} />
+      <input type="text" onChange={(e) => inputTask(e.target.value)} />
+      <input type="button" value="add" onClick={() => addTask(task)} />
       <ul>
         {
           tasks.map(function(item, i) {
