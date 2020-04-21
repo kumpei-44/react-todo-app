@@ -1,19 +1,24 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import {render} from 'react-dom';
-import tasksReducer from './reducers/tasks';
+import {Route} from 'react-router-dom';
 import TodoApp from './containers/TodoApp';
-import {createStore} from 'redux';
+import Error from './components/Error';
+import createStore from './store';
+import {ConnectedRouter} from 'react-router-redux';
+import createBrowserHistory from 'history/createBrowserHistory';
 
-// createStoreでStoreを生成する
-// 引数にはReducerを指定する
-const store = createStore(tasksReducer);
+const history = createBrowserHistory();
+const store = createStore(history);
 
 render(
   <Provider store={store}>
-    <TodoApp />
+    <ConnectedRouter history={history}>
+      <div>
+        <Route exact path="/" component={TodoApp} />
+        <Route path="/error" component={Error} />
+      </div>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 );
-
-// Storeのsubscribeでコンポーネントの再描画を行っていた処理を削除
